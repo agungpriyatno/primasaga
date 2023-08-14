@@ -1,9 +1,14 @@
+export interface IBase<T> {
+  message: string,
+  data: T
+}
+
 export interface IUser {
   id: string,
   name: string,
   username: string,
   email: string,
-  image: string,
+  image?: string,
 }
 
 export interface ICompany {

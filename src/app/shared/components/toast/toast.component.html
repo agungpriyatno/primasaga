@@ -1,7 +1,7 @@
-<div class="absolute left-0 bottom-0 p-5 z-40">
+<div class="absolute left-0 bottom-0 p-5 z-40 w-full">
   <div class="flex flex-col gap-3" [@toast]="list.length">
     <ng-container *ngFor="let item of list">
-      <div (click)="close(item.id!)" class="rounded p-4 text-white max-w-sm 2xl:max-w-lg relative"
+      <div (click)="close(item.id!)" class="rounded p-4 text-white w-1/2 lg:w-1/4 2xl:max-w-lg relative"
         [ngClass]="item.type === 'error' ? 'bg-red-500' : item.type === 'success' ? 'bg-green-500' : 'bg-blue-500'">
         <div class="flex flex-row place-items-center gap-3">
           <span class="text-3xl 2xl:text-4xl">

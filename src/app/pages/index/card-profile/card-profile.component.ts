@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IUser } from 'src/app/shared/models/response';
 import { USER } from 'src/app/shared/dummy/user';
 import { RouterLink } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-card-profile',
@@ -16,6 +17,10 @@ import { RouterLink } from '@angular/router';
 })
 export class CardProfileComponent implements OnInit {
 
+  constructor(
+    private service: AuthService
+  ) {}
+
   data?: IUser
   status: "loading" | "initial" | "error" = "initial"
 
@@ -25,9 +30,14 @@ export class CardProfileComponent implements OnInit {
 
   getData(): void {
     this.status = "loading"
-    setTimeout(() => {
-      this.status = "initial"
-      this.data = USER
-    }, 500)
+    this.service.session.subscribe({
+      next:(res) => {
+        this.data = res.data
+        this.status = "initial"
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 }

@@ -6,6 +6,7 @@ import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
 import { fadeDropdown } from '../../../animations/fade-dropdown';
 import { PostCommentComponent } from './post-comment/post-comment.component';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { PostService } from 'src/app/core/services/post.service';
 
 @Component({
   selector: 'app-post-card',
@@ -25,13 +26,32 @@ export class PostCardComponent {
   @Input({required: true}) public post?: IPost
 
   constructor(
-    private toast: ToastService
+    private toast: ToastService,
+    private postService: PostService
   ){}
   user = USER
   comment: boolean = false
   more: boolean = false
   translate: string = 'translateX(0%)'
   index: number = 0
+
+  onDelete(id: string) {
+    this.postService.delete(id).subscribe({
+      next: (res) => {
+        this.toast.push({
+          content: "Berhasil menghapus postingan",
+          type: "success"
+        })
+      },
+      error: (err) => {
+        console.log(err);
+        this.toast.push({
+          content: "Gagal menghapus postingan",
+          type: "error"
+        })
+      }
+    })
+  }
 
   onLike() {
     if (!this.post!.liked) {

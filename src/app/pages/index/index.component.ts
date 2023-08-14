@@ -11,6 +11,7 @@ import { TimeAgoPipe } from 'src/app/shared/pipes/time-ago.pipe';
 import { ModalCreatePostService } from 'src/app/shared/services/modal-create-post.service';
 import { CardProfileComponent } from './card-profile/card-profile.component';
 import { CardCompaniesComponent } from 'src/app/shared/components/card-companies/card-companies.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -32,6 +33,7 @@ export class IndexComponent implements OnInit {
 
   constructor(
     private createPost: ModalCreatePostService,
+    private auth: AuthService,
   ){}
 
   list: IPost[] = []
@@ -45,10 +47,7 @@ export class IndexComponent implements OnInit {
 
   getList(): void {
     this.status = "loading"
-    setTimeout(() => {
-      this.list = postsDummy(10)
-      this.status = "initial"
-    }, 500)
+
   }
 
   openModalCreate(){
