@@ -1,0 +1,128 @@
+<div class="bg-primary w-full text-white" *ngIf="currentUrl != '/signin' && currentUrl != '/signup'">
+  <div class="wrapper ">
+    <div class="flex flex-row justify-between relative">
+      <div class="flex flex-row place-items-center">
+        <ul class="flex flex-row h-full place-items-center">
+          <li class="hover:bg-red-600 animate h-full px-3 animate ">
+            <div class="flex flex-col h-full justify-center text-lg md:text-xl">
+              <i class="fa-solid fa-icons"></i>
+            </div>
+          </li>
+        </ul>
+        <form class="hidden md:flex flex-row bg-white rounded">
+          <input type="text" placeholder="Cari.." class="text-zinc-800 flex-1">
+          <button class="px-3 py-2 border-r bg-zinc-100 hover:bg-zinc-200 animate text-primary">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+      <div class="flex flex-row place-items-center">
+        <ul class="hidden lg:flex flex-row h-full place-items-center">
+          <ng-container *ngFor="let item of list">
+            <li class=" animate h-full" [ngClass]="item.path === currentUrl ? 'bg-red-600' : 'hover:bg-red-600' ">
+              <a [routerLink]="item.path" class="flex flex-col place-items-center justify-center px-3 py-2 h-full">
+                <i class="fa-solid" [ngClass]="item.icon"></i>
+                <span>{{item.name}}</span>
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+        <ul class="flex flex-row h-full place-items-center">
+          <li class="hover:bg-red-600 animate h-full text-lg md:text-xl px-3 animate md:hidden" (click)="onSearch()">
+            <div class="flex flex-col h-full justify-center">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div @fade class="absolute z-10 left-0 top-[110%] w-full" *ngIf="search">
+              <div class="bg-white shadow rounded text-zinc-800 text-sm">
+                <div class="flex flex-col">
+                  <form class="flex  flex-row bg-zinc-50 rounded">
+                    <input type="text" placeholder="Cari.." class="text-zinc-800 flex-1">
+                    <button class="px-3 py-2 border-r bg-zinc-100 hover:bg-zinc-200 animate text-primary">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="flex flex-col justify-center place-items-center">
+                  <span class="text-zinc-600 py-2">Tidak ada hasil..</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="hover:bg-red-600 animate h-full text-lg md:text-xl px-3 animate">
+            <div class="flex flex-col h-full justify-center">
+              <i class="fa-solid fa-message"></i>
+            </div>
+          </li>
+          <li class="hover:bg-red-600 animate h-full text-lg md:text-xl px-3 animate">
+            <div class="flex flex-col h-full justify-center">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+          </li>
+          <div class="hover:bg-red-600 animate relative" (click)="onProfile()">
+            <div class="flex flex-row px-3 py-2 place-items-center gap-2">
+              <div class="h-9 w-9 rounded-full bg-zinc-100">
+                <img [src]="user.image" alt="" class="w-full h-full object-cover object-center rounded-full">
+              </div>
+              <i class="hidden lg:block fa-solid fa-caret-down"></i>
+            </div>
+            <div @fade class="z-10 absolute right-0 top-[105%] hidden lg:block" (click)="$event.stopPropagation()" *ngIf="profile">
+              <ul class="flex flex-col bg-white rounded py-2 shadow text-zinc-800">
+                <li class="px-3 py-2 hover:bg-red-200 flex flex-row gap-2 place-items-center">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <span>Keluar</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </ul>
+        <!-- <ul class="flex flex-row h-full place-items-center">
+          <li class="hover:bg-red-600 animate h-full px-3 py-4 animate">
+            <div class="flex flex-col h-full justify-center">
+              <span class="font-bold">MASUK</span>
+            </div>
+          </li>
+        </ul> -->
+      </div>
+    </div>
+  </div>
+  <!-- Sidebar -->
+  <div @sidebar class="lg:hidden absolute h-full w-full left-0 top-0 bg-black/25 z-50" *ngIf="profile" (click)="onProfile()">
+    <div class="bg-primary w-2/3 md:w-1/3 h-full card" (click)="$event.stopPropagation()">
+      <div class="flex flex-row justify-between px-4 py-3 text-xl">
+        <a routerLink="/">
+          <i class="fa-solid fa-gear"></i>
+        </a>
+        <a routerLink="/">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </a>
+      </div>
+      <div class="flex flex-col px-3 py-5 place-items-center justify-center gap-3">
+        <div class="h-24 w-24 rounded-full bg-zinc-100">
+          <img [src]="user.image" alt="" class="w-full h-full object-cover object-center rounded-full">
+        </div>
+        <div class="flex flex-col justify-center place-items-center">
+          <span class="text-lg font-bold">{{user.name}}</span>
+          <span class="text-zinc-200">{{user.email}}</span>
+        </div>
+        <ul class="flex flex-col">
+          <li class="hover:bg-red-600 animate h-full rounded">
+            <div class="flex flex-row px-4 py-2 place-content-center items-center h-full gap-3">
+              <i class="fa-solid text-lg fa-right-from-bracket"></i>
+              <span class="font-bold">KELUAR</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <ul class="flex flex-col">
+        <ng-container *ngFor="let item of list">
+          <li class="animate h-full" [ngClass]="item.path === currentUrl ? 'bg-red-600' : 'hover:bg-red-600' ">
+            <div (click)="navigateTo(item.path)" class="grid grid-cols-9 px-4 py-3 place-content-center items-center h-full gap-3 cursor-pointer">
+              <i class="fa-solid text-lg col-span-1" [ngClass]="item.icon"></i>
+              <span class="col-span-8">{{item.name}}</span>
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>

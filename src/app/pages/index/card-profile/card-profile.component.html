@@ -1,0 +1,53 @@
+<div class="bg-white shadow rounded flex flex-col" *ngIf="status == 'initial'">
+  <div class="bg-primary rounded-t h-32 w-full relative">
+    <div class="absolute left-1/2 -translate-x-1/2 top-1/2">
+      <div class="h-28 w-28 bg-zinc-200 rounded-full border-4 border-white">
+        <img [src]="data?.image" alt="" class="object-cover h-full w-full rounded-full">
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col pt-14">
+    <div class="flex flex-col justify-center place-items-center">
+      <span class="font-bold text-lg">{{data?.name}}</span>
+      <span class="text-zinc-500">bio here</span>
+    </div>
+    <div class="flex flex-row w-full">
+      <div class="py-3 text-center flex flex-col flex-1">
+        <span class="text-zinc-500">Pengikut</span>
+        <span class="text-lg">1000</span>
+      </div>
+      <div class="py-3 text-center flex flex-col flex-1">
+        <span class="text-zinc-500">Mengikuti</span>
+        <span class="text-lg">1000</span>
+      </div>
+    </div>
+    <div class="flex py-3 flex-col animate cursor-pointer hover:bg-red-100 text-primary text-center">
+      <a class="select-none" routerLink="/profile">Lihat Profil</a>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white shadow rounded flex flex-col" *ngIf="status == 'loading'">
+  <div class="bg-primary rounded-t h-32 w-full relative">
+    <div class="absolute left-1/2 -translate-x-1/2 top-1/2">
+      <div class="h-28 w-28 bg-zinc-200 rounded-full">
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col pt-14">
+    <div class="flex flex-col justify-center place-items-center px-10 gap-2">
+      <span class="h-4 w-full bg-zinc-200 rounded animate-pulse"></span>
+      <span class="h-2 w-full bg-zinc-200 rounded animate-pulse"></span>
+    </div>
+    <div class="flex flex-row w-full">
+      <div class="py-3 text-center flex flex-col flex-1 gap-2 px-3">
+        <span class="h-4 w-full bg-zinc-200 rounded animate-pulse"></span>
+      <span class="h-2 w-full bg-zinc-200 rounded animate-pulse"></span>
+      </div>
+      <div class="py-3 text-center flex flex-col flex-1 gap-2 px-3">
+        <span class="h-4 w-full bg-zinc-200 rounded animate-pulse"></span>
+        <span class="h-2 w-full bg-zinc-200 rounded animate-pulse"></span>
+      </div>
+    </div>
+  </div>
+</div>

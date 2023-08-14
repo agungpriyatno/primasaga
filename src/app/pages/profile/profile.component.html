@@ -1,0 +1,63 @@
+<div class="flex flex-col">
+  <div class="bg-zinc-100 h-[150px] md:h-[200px] lg:h-[300px] w-full relative">
+    <div class="wrapper absolute left-0 top-0 w-full">
+      <div class="flex flex-row w-full justify-end py-5">
+        <button class="bg-primary text-white">Ubah</button>
+      </div>
+    </div>
+    <img src="https://picsum.photos/1000/200" class="object-center object-cover h-full w-full">
+  </div>
+  <div class="wrapper w-full">
+    <div class="grid grid-cols-12 gap-y-5">
+      <div class="col-span-12 md:col-span-5 lg:col-span-3">
+        <div class="flex flex-col px-2.5">
+          <div class="bg-white shadow rounded flex flex-col p-4">
+            <div class="flex flex-col pt-24 relative">
+              <div class="absolute left-1/2 -translate-x-1/2 -top-[80px]">
+                <div class="h-40 w-40 bg-zinc-200 rounded-full border-8 border-white relative">
+                  <img [src]="user.image" alt="" class="object-cover h-full w-full rounded-full">
+                  <div class="h-10 w-10 bg-primary rounded-full absolute right-0 top-0 flex flex-row justify-center place-items-center">
+                    <i class="fa-solid fa-camera text-white text-lg"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col justify-center place-items-center">
+                <span class="font-bold text-xl">Agung Priyatno</span>
+                <span class="text-zinc-500">bio here</span>
+              </div>
+              <div class="flex flex-row w-full">
+                <div class="py-3 text-center flex flex-col flex-1">
+                  <span class="text-zinc-500">Pengikut</span>
+                  <span class="text-lg">1000</span>
+                </div>
+                <div class="py-3 text-center flex flex-col flex-1">
+                  <span class="text-zinc-500">Mengikuti</span>
+                  <span class="text-lg">1000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-7 lg:col-span-6">
+        <div class="flex flex-col px-2.5 py-10">
+          <div class="flex flex-col gap-5">
+            <ul class="flex flex-row gap-5">
+              <li class="flex flex-col gap-1 justify-center place-items-center text-primary">
+                <span class="text-4xl"><i class="fa-solid fa-comments"></i></span>
+                <span>Postingan</span>
+              </li>
+              <li class="flex flex-col gap-1 justify-center place-items-center text-zinc-500">
+                <span class="text-4xl"><i class="fa-solid fa-address-card"></i></span>
+                <span>Informasi</span>
+              </li>
+            </ul>
+            <app-list-post [user]="user"></app-list-post>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-3"></div>
+    </div>
+  </div>
+</div>

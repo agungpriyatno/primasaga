@@ -1,0 +1,68 @@
+<div class="bg-white rounded p-5">
+  <div class="flex flex-col gap-3">
+    <div class="flex flex-row justify-between">
+      <div class="flex flex-row gap-3 place-items-center">
+        <div class="h-12 w-12 rounded-full">
+          <img [src]="post?.user?.image" alt="" class="object-cover rounded-full">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-base">{{post?.user?.name}}</span>
+          <span class="text-xs text-zinc-500"><i class="fa-solid fa-clock"></i> {{post?.createdAt |
+            timeAgo}}</span>
+        </div>
+      </div>
+      <button class="text-base">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+    </div>
+    <div class="w-full h-[300px] md:h-[340px] lg:h-[400px] xl:h-[500px] overflow-hidden relative bg-zinc-200 rounded" *ngIf="post?.images?.length">
+      <div class="flex flex-row h-full rounded animate" [style.transform]="translate">
+        <ng-container *ngFor="let image of post?.images">
+          <img [src]="image.url" [alt]="image.name" class="object-cover h-full w-full flex-shrink-0 rounded">
+        </ng-container>
+      </div>
+      <ng-container *ngIf="(post?.images?.length ?? 0) > 1">
+        <div class="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 select-none" (click)="slideImage(false)">
+          <div class=" h-10 w-10 rounded-full bg-white/20 flex justify-center place-items-center">
+            <i class="fa-solid fa-chevron-left text-white"></i>
+          </div>
+        </div>
+        <div class="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 select-none" (click)="slideImage(true)">
+          <div class=" h-10 w-10 rounded-full bg-white/20 flex justify-center place-items-center">
+            <i class="fa-solid fa-chevron-right text-white"></i>
+          </div>
+        </div>
+        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-row gap-1">
+          <ng-container *ngFor="let item of post?.images; let i = index">
+            <div class="h-2 w-2 rounded-full animate" [ngClass]="index == i ? 'bg-primary' : 'bg-white'"></div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+    <p class="text-zinc-700">
+      {{ more ? post?.content : contentSlicer(post?.content ?? "") }}
+      <span *ngIf="(post?.content?.length ?? 0) > 30" class="text-primary" (click)="moreToggle()">{{more ? "Lebih sedikit" : "Lebih banyak" }}</span>
+    </p>
+    <div class="flex flex-col gap-3">
+      <div class="flex flex-row justify-between text-zinc-500 text-xs py-2">
+        <span>{{post?.like}} disukai</span>
+        <span>{{post?.comment}} komentar</span>
+      </div>
+      <div class="grid grid-cols-2">
+        <button class="font-semibold text-base" [ngClass]="post?.liked ? 'text-blue-500' : ''" (click)="onLike()">
+          <div class="flex flex-row justify-center place-items-center gap-2">
+            <i class="fa-solid fa-thumbs-up"></i>
+            <span>Suka</span>
+          </div>
+        </button>
+        <button class="font-semibold text-base hover:text-green-500" (click)="commentToggler()">
+          <div class="flex flex-row justify-center place-items-center gap-2">
+            <i class="fa-solid fa-comment"></i>
+            <span>Komentar</span>
+          </div>
+        </button>
+      </div>
+      <app-post-comment [data]="post" @fadeDropdown *ngIf="comment" (addComment)="onAddComment()"></app-post-comment>
+    </div>
+  </div>
+</div>

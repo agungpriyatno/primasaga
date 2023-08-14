@@ -1,0 +1,16 @@
+<div class="text-sm h-screen w-screen relative flex flex-col">
+  <app-header></app-header>
+  <div class="flex-1 overflow-y-scroll" (scroll)="onScroll($event)">
+    <div id="top"></div>
+    <ng-content></ng-content>
+  </div>
+  <div (click)="onTopButton()" @slideUp class="absolute right-5 bottom-5 select-none" *ngIf="topButton">
+    <div
+      class="h-10 w-10 rounded-full bg-primary hover:bg-red-600 cursor-pointer shadow flex justify-center place-items-center">
+      <i class="fa-solid fa-chevron-up font-bold text-lg text-white "></i>
+    </div>
+  </div>
+  <app-modal></app-modal>
+  <app-modal-signin></app-modal-signin>
+  <app-toast></app-toast>
+</div>

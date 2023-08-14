@@ -1,0 +1,34 @@
+<app-auth>
+  <div class="flex flex-col gap-10 lg:px-5">
+    <div class="flex flex-col text-lg">
+      <span class="font-bold">Masuk</span>
+      <hr class="h-1 w-8 rounded-full bg-primary">
+    </div>
+    <form action="">
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-col">
+          <div class="flex flex-row border rounded place-items-center px-2">
+            <i class="fa-solid fa-envelope text-zinc-500"></i>
+            <input type="text" class="flex-1" placeholder="Email">
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex flex-row border rounded place-items-center px-2">
+            <i class="fa-solid fa-lock text-zinc-500"></i>
+            <input type="password" class="flex-1" placeholder="Password">
+          </div>
+        </div>
+        <button class="bg-primary hover:bg-red-600 text-white font-bold">MASUK</button>
+      </div>
+    </form>
+    <div class="flex flex-col gap-3">
+      <div class="flex place-items-center gap-2">
+        <hr class="flex-1">
+        <span>atau masuk dengan</span>
+        <hr class="flex-1">
+      </div>
+      <button class="bg-red-500 hover:bg-red-600 text-white font-bold"><i class="fa-brands fa-google"></i> GOOGLE</button>
+      <button class="bg-zinc-500 hover:bg-zinc-600 text-white font-bold"><i class="fa-brands fa-github"></i> GITHUB</button>
+    </div>
+  </div>
+</app-auth>

@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-3">
+  <form [formGroup]="form" (submit)="submit()" class="flex flex-row bg-zinc-100 rounded">
+    <input type="text" class="flex-1" placeholder="Komentar.." formControlName="content">
+    <button type="submit">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </form>
+  <div class="flex flex-col gap-3">
+    <div *ngIf="list.length == 0 && status == 'initial'"  class="flex flex-col justify-center place-items-center py-2">
+      <span>Tidak ada komentar</span>
+    </div>
+    <ng-container *ngFor="let item of list">
+      <app-post-comment-item [data]="item"></app-post-comment-item>
+    </ng-container>
+  </div>
+  <div class="flex flex-col gap-3" *ngIf="status == 'loading'">
+    <div class="flex flex-row gap-2">
+      <div class="bg-zinc-300 h-10 w-10 rounded-full animate-pulse">
+      </div>
+      <div class="flex flex-col flex-1 gap-2">
+        <div class="flex-1 w-full rounded bg-zinc-300 animate-pulse"></div>
+        <div class="flex-1 w-full rounded bg-zinc-300 animate-pulse"></div>
+      </div>
+      <div class="bg-zinc-300 h-5 w-5 rounded-full animate-pulse">
+      </div>
+    </div>
+    <div class="flex flex-row gap-2">
+      <div class="bg-zinc-300 h-10 w-10 rounded-full animate-pulse">
+      </div>
+      <div class="flex flex-col flex-1 gap-2">
+        <div class="flex-1 w-full rounded bg-zinc-300 animate-pulse"></div>
+        <div class="flex-1 w-full rounded bg-zinc-300 animate-pulse"></div>
+      </div>
+      <div class="bg-zinc-300 h-5 w-5 rounded-full animate-pulse">
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col place-items-center justify-center py-2" *ngIf="status == 'error'">
+    <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+    <span>Terjadi kesalahan</span>
+    <span class="text-primary hover:text-red-600 cursor-pointer font-bold" (click)="getList()">Muat ulang</span>
+  </div>
+</div>

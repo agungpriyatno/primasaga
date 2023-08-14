@@ -1,0 +1,42 @@
+<div @modal class="absolute left-0 top-0 bg-black/25 h-screen w-screen z-50 text-zinc-800"
+  (click)="close(false)" *ngIf="service.status">
+  <div class="flex flex-col h-screen w-screen place-items-center justify-center">
+    <div class="card bg-white rounded-lg px-5 pb-5 pt-20 relative max-w-md mx-5" (click)="$event.stopPropagation()">
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-col justify-center place-items-center">
+          <span class="text-xl font-bold">Yahh.. Kamu belum masuk</span>
+          <span class="text-sm text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque dolore aperiam dignissimos, quo nisi commodi neque nostrum obcaecati non consectetur!</span>
+        </div>
+        <div class="flex flex-col place-items-center gap-2">
+          <button class="px-3 py-2 rounded-lg bg-primary ransition-colors duration-200 hover:bg-red-600 text-white w-full">
+            <span class="font-bold">MASUK</span>
+          </button>
+          <div class="flex flex-row place-items-center w-full gap-2">
+            <hr class="h-px flex-1">
+            <span>Atau masuk dengan</span>
+            <hr class="h-px flex-1">
+          </div>
+          <div class="flex flex-row w-full gap-3 place-items-center justify-center">
+            <button class="px-3 py-3 rounded-full transition-colors duration-200 bg-red-500 hover:bg-red-600 text-white">
+              <div class="font-bold flex flex-col justify-center place-items-center h-full">
+                <i class="fa-brands fa-google"></i>
+              </div>
+            </button>
+            <button class="px-3 py-3 rounded-full transition-colors duration-200 bg-zinc-500 hover:bg-zinc-600 text-white">
+              <div class="font-bold flex flex-col justify-center place-items-center h-full">
+                <i class="fa-brands fa-github"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="absolute -top-12 left-1/2 -translate-x-1/2">
+        <div class="h-24 w-24 bg-primary rounded-full border-8 border-white">
+          <div class="h-full w-full flex flex-col justify-center place-items-center">
+            <i class="fa-solid fa-circle-info text-4xl text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

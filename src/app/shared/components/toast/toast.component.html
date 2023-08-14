@@ -1,0 +1,25 @@
+<div class="absolute left-0 bottom-0 p-5 z-40">
+  <div class="flex flex-col gap-3" [@toast]="list.length">
+    <ng-container *ngFor="let item of list">
+      <div (click)="close(item.id!)" class="rounded p-4 text-white max-w-sm 2xl:max-w-lg relative"
+        [ngClass]="item.type === 'error' ? 'bg-red-500' : item.type === 'success' ? 'bg-green-500' : 'bg-blue-500'">
+        <div class="flex flex-row place-items-center gap-3">
+          <span class="text-3xl 2xl:text-4xl">
+            <i class="fa-solid fa-circle-info" *ngIf="item.type === 'info'"></i>
+            <i class="fa-solid fa-circle-xmark" *ngIf="item.type === 'error'"></i>
+            <i class="fa-solid fa-circle-check" *ngIf="item.type === 'success'"></i>
+          </span>
+          <div class="flex flex-col">
+            <span class="font-bold 2xl:text-xl">
+              {{item.type === 'error' ? 'Kesalahan' : item.type === 'success' ? 'Berhasil' : 'Informasi'}}
+            </span>
+            <span class="text-sm 2xl:text-lg">{{item.content}}</span>
+          </div>
+        </div>
+        <button class="absolute right-2 top-1">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

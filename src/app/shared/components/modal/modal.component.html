@@ -1,0 +1,12 @@
+<div @modalAnimation class="absolute left-0 top-0 bg-black/25 h-screen w-screen z-50" (click)="close(false)" *ngIf="service.status">
+  <div class="flex flex-col h-screen w-screen place-items-center justify-center">
+    <div class="card bg-white rounded-lg p-5" (click)="$event.stopPropagation()">
+      <div class="flex flex-col gap-3">
+        <span>Helo world</span>
+        <button class="px-3 py-2 rounded-lg bg-blue-500 text-white" (click)="close(true)">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

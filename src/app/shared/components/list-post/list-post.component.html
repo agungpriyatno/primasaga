@@ -1,0 +1,30 @@
+<div class="flex flex-col gap-5">
+  <ng-container *ngFor="let item of list">
+    <app-post-card [post]="item"></app-post-card>
+  </ng-container>
+  <div class="flex flex-row w-full justify-center place-items-center" *ngIf="status == 'initial'">
+    <button class="bg-primary text-white hover:bg-red-600" (click)="getList()">Lebih Banyak</button>
+  </div>
+  <ng-container *ngIf="status == 'loading'">
+    <div *ngFor="let item of [0,0]">
+      <div class="rounded p-5">
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-3 place-items-center">
+              <div class="h-12 w-12 rounded-full bg-zinc-100 animate-pulse">
+              </div>
+              <div class="flex flex-col gap-2">
+                <div class="h-5 w-52 bg-zinc-100 animate-pulse rounded"></div>
+                <div class="h-2 w-24 bg-zinc-100 animate-pulse rounded"></div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full h-[300px] md:h-[340px] lg:h-[400px] xl:h-[500px] bg-zinc-100 animate-pulse rounded">
+          </div>
+          <div class="w-full h-8 bg-zinc-100 animate-pulse rounded"></div>
+          <div class="w-1/2 h-5 bg-zinc-100 animate-pulse rounded"></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

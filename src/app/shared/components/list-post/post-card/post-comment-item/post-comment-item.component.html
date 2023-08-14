@@ -1,0 +1,16 @@
+<div class="flex flex-col gap-2">
+  <div class="flex flex-row place-items-center gap-2">
+    <div class="bg-zinc-200 h-10 w-10 rounded-full">
+      <img [src]="data?.user?.image" alt="" class="object-cover rounded-full">
+    </div>
+    <p class="flex-1"><span class="font-bold">{{data?.user?.name}}</span> {{data?.content}}</p>
+    <button class="h-fit">
+      <i class="fa-solid fa-heart"></i>
+    </button>
+  </div>
+  <div class="flex flex-row gap-2 pl-12">
+    <span class="text-xs text-primary cursor-pointer" (click)="onReply()">{{reply ? 'Tutup Balasan' : 'Balas'}}</span>
+    <span class="text-xs text-primary cursor-pointer" (click)="onReply()" *ngIf="((data?.reply ?? 0) > 0) && !reply">Lihat {{data?.reply}} Balasan</span>
+  </div>
+  <app-post-reply @fadeDropdown [data]="data" *ngIf="reply" (onReply)="onAddReply()"></app-post-reply>
+</div>

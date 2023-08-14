@@ -1,0 +1,33 @@
+<div class="bg-white shadow rounded p-4">
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-row">
+      <span class="font-bold">Saran Perusahaan</span>
+    </div>
+    <ul class="flex flex-col gap-2" *ngIf="status == 'initial'">
+      <li class="flex flex-row gap-2 place-items-center" *ngFor="let item of list">
+        <div class="bg-zinc-200 h-10 w-10 rounded-full">
+          <img [src]="item.image" alt="" class="object-cover rounded-full">
+        </div>
+        <div class="flex-1 flex flex-col">
+          <span>{{item.name}}</span>
+          <span class="text-xs text-zinc-500">bio here</span>
+        </div>
+        <button class="text-xs bg-primary hover:bg-red-600 text-white font-bold">Ikuti</button>
+      </li>
+      <div class="flex flex-col animate cursor-pointer hover:text-red-600 text-primary text-center">
+        <span class="select-none">Lainnya</span>
+      </div>
+    </ul>
+    <ul class="flex flex-col gap-2" *ngIf="status == 'loading'">
+      <li class="flex flex-row gap-2 place-items-center" *ngFor="let item of [0,0,0,0,0]">
+        <div class="bg-zinc-200 animate-pulse h-10 w-10 rounded-full">
+        </div>
+        <div class="flex-1 flex flex-col gap-1">
+          <span class="h-4 bg-zinc-200 animate-pulse rounded"></span>
+          <span class="h-2 bg-zinc-200 animate-pulse rounded"></span>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>

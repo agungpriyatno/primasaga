@@ -1,0 +1,31 @@
+<div class="fixed h-screen w-screen bg-primary text-zinc-800">
+  <div class="flex flex-col place-items-center pt-24 px-5  md:px-10 lg:px-0">
+    <div class="bg-white rounded lg:w-[870px]">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="flex flex-col p-10 lg:p-5 gap-32 lg:py-16">
+          <div class="flex flex-col lg:pl-10 gap-10">
+            <div class="flex flex-row gap-4 text-3xl place-items-center">
+              <i class="fa-solid fa-icons text-primary text-4xl"></i>
+              <span class="font-black">PRIMASAGA</span>
+            </div>
+            <p class="text-zinc-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit esse mollitia recusandae! Perferendis quam exercitationem commodi atque enim animi facere?</p>
+          </div>
+          <img src="/assets/images/cm-main-img.png" alt="" class="hidden lg:block">
+        </div>
+        <div class="flex flex-col lg:py-8 px-10 pb-10 lg:pb-0 lg:px-14 gap-5 lg:gap-20">
+          <div class="flex flex-row lg:justify-end">
+            <div class="flex flex-row justify-end bg-zinc-200 rounded">
+              <a class="px-3 py-1" routerLink="/signin" [ngClass]="current === '/signin' ? 'bg-primary hover:bg-red-600 text-white rounded' : 'text-zinc-600'">
+                Masuk
+              </a>
+              <a class="px-3 py-1" routerLink="/signup" [ngClass]="current === '/signup' ? 'bg-primary hover:bg-red-600 text-white rounded' : 'text-zinc-600'">
+                Daftar
+              </a>
+            </div>
+          </div>
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
