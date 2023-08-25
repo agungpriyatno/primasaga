@@ -28,6 +28,7 @@
           </div>
           <span class="text-xs text-red-500" *ngIf="password?.touched && password?.hasError('required')">Password dibutuhkan!</span>
         </div>
+
         <button type="submit" class=" text-white font-bold" [ngClass]="isLoading ? 'bg-zinc-500' : 'bg-primary hover:bg-red-600'">
           {{ isLoading ? "Mengunggah..." : "DAFTAR"}}
         </button>

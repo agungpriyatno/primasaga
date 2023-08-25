@@ -36,7 +36,9 @@ export class SignupComponent {
   submit() {
     if (this.form.invalid) return this.form.markAllAsTouched()
     this.isLoading = true
-    this.service.signUp(this.formData).subscribe({
+   let data = this.form.value
+   data["password_confirm"] = this.password?.value
+    this.service.signUp(data).subscribe({
       next: (_) => {
         this.toast.push({
           content: "Berhasil mendaftarkan akun!",

@@ -1,7 +1,7 @@
 export const environment = {
   api: {
     base: "http://labourpool-api.mareca.vc/api",
-    auth: "user/auth",
+    auth: "/auth",
     post: "user/posts",
   }
 };

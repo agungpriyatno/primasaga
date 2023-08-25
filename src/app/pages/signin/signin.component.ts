@@ -36,7 +36,7 @@ export class SigninComponent {
   submit() {
     if (this.form.invalid) return this.form.markAllAsTouched()
     this.isLoading = true
-    this.service.signIn(this.formData).subscribe({
+    this.service.signIn(this.form.value).subscribe({
       next: (res) => {
         this.service.token = res.data
         this.router.navigateByUrl("/")

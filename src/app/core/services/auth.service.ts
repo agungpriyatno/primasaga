@@ -13,11 +13,11 @@ export class AuthService {
   path: string = environment.api.auth
 
 
-  signIn(data: FormData): Observable<IBase<string>>{
+  signIn(data: any): Observable<IBase<string>>{
     return this.http.post<IBase<string>>(generateUrl(this.path + "/login"), data)
   }
 
-  signUp(data: FormData): Observable<IBase<IUser>>{
+  signUp(data: any): Observable<IBase<IUser>>{
     return this.http.post<IBase<IUser>>(generateUrl(this.path + "/register"), data)
   }
 
