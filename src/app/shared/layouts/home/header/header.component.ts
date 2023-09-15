@@ -7,6 +7,7 @@ import { fade } from 'src/app/shared/animations/fade';
 import { sidebar } from 'src/app/shared/animations/sidebar';
 import { IUser } from 'src/app/shared/models/response';
 import { USER } from 'src/app/shared/dummy/user';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -25,11 +26,12 @@ import { USER } from 'src/app/shared/dummy/user';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ){}
 
   currentUrl: string = ""
-  user: IUser = USER
+  user?: IUser = USER
   list = MENU
   search = false
   profile = false
@@ -39,8 +41,8 @@ export class HeaderComponent implements OnInit {
       if (res instanceof NavigationEnd) {
         this.currentUrl = res.url
       }
-
     })
+    this.getUser()
   }
 
   onProfile() {
@@ -55,6 +57,17 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl(path).then((res) => {
       if(res){
         this.profile = false
+      }
+    })
+  }
+
+  getUser(): void {
+    this.auth.session().subscribe({
+      next: (res) => {
+        this.user = res
+      },
+      error: (err) => {
+        console.log(err);
       }
     })
   }

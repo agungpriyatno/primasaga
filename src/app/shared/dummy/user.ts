@@ -9,7 +9,7 @@ const customConfig: Config = {
 };
 
 export const USER: IUser = {
-  id: "1",
+  id: 1,
   name: "Agung Priyatno",
   username: "agungpriyatno",
   email: "agungpriyatno@gmail.com",
@@ -21,7 +21,7 @@ export function usersDummy(length: number): IUser[] {
   var data: IUser[] = []
   for (let index = 0; index < length; index++) {
     data.push({
-      id: index.toString(),
+      id: index,
       name: uniqueNamesGenerator(customConfig),
       username: "",
       email: "",
@@ -33,7 +33,7 @@ export function usersDummy(length: number): IUser[] {
 
 export function randomUser(id: number = 0): IUser {
   return {
-    id: "",
+    id: id,
     name: uniqueNamesGenerator(customConfig),
     username: "",
     email: "",

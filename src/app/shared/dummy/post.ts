@@ -7,7 +7,7 @@ export function postsDummy(length: number): IPost[] {
   var data: IPost[] = []
   for (let i = 0; i < length; i++) {
     data.push({
-      id: i.toString(),
+      id: i,
       user: randomUser(),
       content: lorem.generateParagraphs(2),
       liked: false,
@@ -25,7 +25,7 @@ export function postsProfileDummy(length: number): IPost[] {
   var data: IPost[] = []
   for (let i = 0; i < length; i++) {
     data.push({
-      id: i.toString(),
+      id: i,
       user: USER,
       content: lorem.generateParagraphs(2),
       liked: false,
@@ -43,7 +43,7 @@ function randomImages(index: number): IPostImage[] {
   var data: IPostImage[] = []
   for (let i = 0; i < randomNumber(5); i++) {
     data.push({
-      id: i.toString(),
+      id: i,
       name: "",
       url: "https://picsum.photos/600?random=" + index + i
     })

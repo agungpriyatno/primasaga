@@ -11,7 +11,7 @@ export function companyDummy(length: number): ICompany[] {
   var data: ICompany[] = []
   for (let index = 0; index < length; index++) {
     data.push({
-      id: index.toString(),
+      id: index,
       name: uniqueNamesGenerator(customConfig),
       username: "",
       email: "",

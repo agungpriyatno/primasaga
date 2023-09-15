@@ -6,6 +6,7 @@ import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
 import { fadeDropdown } from '../../../animations/fade-dropdown';
 import { PostCommentComponent } from './post-comment/post-comment.component';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { PostService } from 'src/app/core/service/post.service';
 
 @Component({
   selector: 'app-post-card',
@@ -22,11 +23,12 @@ import { ToastService } from 'src/app/shared/services/toast.service';
   ]
 })
 export class PostCardComponent {
-  @Input({required: true}) public post?: IPost
+  @Input({ required: true }) public post?: IPost
 
   constructor(
-    private toast: ToastService
-  ){}
+    private toast: ToastService,
+    private service: PostService
+  ) { }
   user = USER
   comment: boolean = false
   more: boolean = false
@@ -35,15 +37,23 @@ export class PostCardComponent {
 
   onLike() {
     if (!this.post!.liked) {
-      this.post!.liked = true
-      this.post!.like += 1
+      this.service.like(this.post?.id ?? 0).subscribe({
+        next: (res) => {
+          this.post!.liked = true
+          this.post!.like += 1
+        }
+      })
     } else {
-      this.post!.liked = false
-      this.post!.like -= 1
+      this.service.like(this.post?.id ?? 0).subscribe({
+        next: (res) => {
+          this.post!.liked = false
+          this.post!.like -= 1
+        }
+      })
     }
   }
 
-  onAddComment(){
+  onAddComment() {
     this.post!.comment += 1
   }
 
