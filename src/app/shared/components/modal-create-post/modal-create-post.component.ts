@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { modal } from '../../animations/modal';
 import { ModalCreatePostService } from '../../services/modal-create-post.service';
@@ -20,7 +20,7 @@ import { IUser } from '../../models/response';
   styleUrls: ['./modal-create-post.component.css'],
   animations: [modal]
 })
-export class ModalCreatePostComponent {
+export class ModalCreatePostComponent implements OnInit {
   constructor(
     public service: ModalCreatePostService,
     public auth: AuthService,
@@ -29,6 +29,10 @@ export class ModalCreatePostComponent {
     private fb: FormBuilder,
     private router: Router,
   ) { }
+
+  ngOnInit(): void {
+    this.getUser()
+  }
 
   isLoading = false
 
