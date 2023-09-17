@@ -8,9 +8,11 @@
         </div>
         <form [formGroup]="form" class="flex flex-col gap-5" (submit)="submit()">
           <div class="flex flex-row gap-3 place-items-center">
-            <div class="h-12 w-12 2xl:h-16 2xl:w-16 bg-zinc-200 rounded-full"></div>
+            <div class="h-12 w-12 2xl:h-16 2xl:w-16 bg-zinc-200 rounded-full">
+              <img [src]="user?.image" alt="" class="object-cover h-full w-full rounded-full">
+            </div>
             <div class="flex flex-col gap-1">
-              <span class="font-bold text-base 2xl:text-xl">Agung Priyatno</span>
+              <span class="font-bold text-base 2xl:text-xl">{{user?.name}}</span>
               <div class="px-2 py-1 bg-zinc-100 w-fit rounded flex flex-row gap-2 place-items-center justify-center">
                 <i class="fa-solid fa-globe"></i>
                 <span class="text-xs">Publik</span>

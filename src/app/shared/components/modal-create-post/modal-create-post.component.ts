@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { PostService } from 'src/app/core/service/post.service';
 import { ToastService } from '../../services/toast.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { IUser } from '../../models/response';
 
 @Component({
   selector: 'app-modal-create-post',
@@ -21,6 +23,7 @@ import { Router } from '@angular/router';
 export class ModalCreatePostComponent {
   constructor(
     public service: ModalCreatePostService,
+    public auth: AuthService,
     private post: PostService,
     private toast: ToastService,
     private fb: FormBuilder,
@@ -29,6 +32,7 @@ export class ModalCreatePostComponent {
 
   isLoading = false
 
+  user?: IUser
   files: any[] = []
   public fileUrls: string[] = []
 
@@ -67,6 +71,17 @@ export class ModalCreatePostComponent {
   deleteImage(index: number) {
     this.fileUrls.splice(index, 1)
     this.files.splice(index, 1)
+  }
+
+  getUser(): void {
+    this.auth.session().subscribe({
+      next: (res) => {
+        this.user = res
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
   onFilePick(event: any) {
