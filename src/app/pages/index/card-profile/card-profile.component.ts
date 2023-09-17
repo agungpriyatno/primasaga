@@ -25,6 +25,11 @@ export class CardProfileComponent implements OnInit {
     this.getData()
   }
 
+  logout(): void {
+    this.service.token = ""
+    window.location.reload()
+  }
+
   getData(): void {
     this.status = "loading"
     this.service.session().subscribe({

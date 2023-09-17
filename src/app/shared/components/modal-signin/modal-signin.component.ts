@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { modal } from '../../animations/modal';
 import { ModalSigninService } from '../../services/modal-signin.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-modal-signin',
@@ -13,6 +14,9 @@ import { ModalSigninService } from '../../services/modal-signin.service';
 })
 export class ModalSigninComponent {
   constructor(public service: ModalSigninService) { }
+
+  google = environment.api + "/auth/google"
+  github = environment.api + "/auth/github"
 
   close(value: boolean) {
     this.service.close(value)

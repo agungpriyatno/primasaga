@@ -15,24 +15,24 @@
             <div class="flex flex-col pt-24 relative">
               <div class="absolute left-1/2 -translate-x-1/2 -top-[80px]">
                 <div class="h-40 w-40 bg-zinc-200 rounded-full border-8 border-white relative">
-                  <img [src]="user.image" alt="" class="object-cover h-full w-full rounded-full">
+                  <img [src]="user?.image" alt="" class="object-cover h-full w-full rounded-full">
                   <div class="h-10 w-10 bg-primary rounded-full absolute right-0 top-0 flex flex-row justify-center place-items-center">
                     <i class="fa-solid fa-camera text-white text-lg"></i>
                   </div>
                 </div>
               </div>
               <div class="flex flex-col justify-center place-items-center">
-                <span class="font-bold text-xl">Agung Priyatno</span>
+                <span class="font-bold text-xl">{{user?.name}}</span>
                 <span class="text-zinc-500">bio here</span>
               </div>
               <div class="flex flex-row w-full">
                 <div class="py-3 text-center flex flex-col flex-1">
                   <span class="text-zinc-500">Pengikut</span>
-                  <span class="text-lg">1000</span>
+                  <span class="text-lg">0</span>
                 </div>
                 <div class="py-3 text-center flex flex-col flex-1">
                   <span class="text-zinc-500">Mengikuti</span>
-                  <span class="text-lg">1000</span>
+                  <span class="text-lg">0</span>
                 </div>
               </div>
             </div>

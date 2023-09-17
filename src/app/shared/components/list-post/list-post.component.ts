@@ -35,7 +35,16 @@ export class ListPostComponent {
     this.status = "loading"
     setTimeout(() => {
       if (this.user != undefined) {
-        this.list.push(...postsProfileDummy(5))
+        this.params.append("userId", this.user.id)
+        this.service.query(this.params).subscribe({
+          next: (res) => {
+            
+            this.list.push(...res)
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       } else {
         this.service.query(this.params).subscribe({
           next: (res) => {

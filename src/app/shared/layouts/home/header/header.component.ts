@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   ){}
 
   currentUrl: string = ""
-  user?: IUser = USER
+  user?: IUser
   list = MENU
   search = false
   profile = false

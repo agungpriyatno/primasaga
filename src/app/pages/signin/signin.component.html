@@ -4,21 +4,24 @@
       <span class="font-bold">Masuk</span>
       <hr class="h-1 w-8 rounded-full bg-primary">
     </div>
-    <form action="">
+    <form [formGroup]="form" (submit)="submit()">
       <div class="flex flex-col gap-3">
         <div class="flex flex-col">
           <div class="flex flex-row border rounded place-items-center px-2">
             <i class="fa-solid fa-envelope text-zinc-500"></i>
-            <input type="text" class="flex-1" placeholder="Email">
+            <input type="text" class="flex-1" placeholder="Email" formControlName="email">
           </div>
+          <span class="text-red-600 text-xs" *ngIf="email?.hasError('email')">* Email tidak valid</span>
+          <span class="text-red-600 text-xs" *ngIf="email?.touched && email?.hasError('required')">* Email dibutuhkan</span>
         </div>
         <div class="flex flex-col">
           <div class="flex flex-row border rounded place-items-center px-2">
             <i class="fa-solid fa-lock text-zinc-500"></i>
-            <input type="password" class="flex-1" placeholder="Password">
+            <input type="password" class="flex-1" placeholder="Password" formControlName="password">
           </div>
+          <span class="text-red-600 text-xs" *ngIf="password?.touched && password?.hasError('required')">* Password dibutuhkan</span>
         </div>
-        <button class="bg-primary hover:bg-red-600 text-white font-bold">MASUK</button>
+        <button class="bg-primary hover:bg-red-600 text-white font-bold">{{isLoading ? "Mengunggah..." : "MASUK"}}</button>
       </div>
     </form>
     <div class="flex flex-col gap-3">

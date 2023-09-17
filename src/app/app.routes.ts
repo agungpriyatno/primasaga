@@ -11,13 +11,14 @@ export const routes: Routes = [
     loadComponent: () => import("./pages/signin/signin.component").then(c => c.SigninComponent)
   },
   {
-    path: "authorize",
-    loadComponent: () => import("./pages/authorize/authorize.component").then(c => c.AuthorizeComponent)
-  },
-  {
     path: "signup",
     loadComponent: () => import("./pages/signup/signup.component").then(c => c.SignupComponent)
   },
+  {
+    path: "authorize",
+    loadComponent: () => import("./pages/authorize/authorize.component").then(c => c.AuthorizeComponent)
+  },
+  
   {
     path: "profile",
     loadComponent: () => import("./pages/profile/profile.component").then(c => c.ProfileComponent),

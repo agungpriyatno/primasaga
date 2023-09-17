@@ -2,14 +2,15 @@
   <div class="grid grid-cols-12 py-10 gap-y-5">
     <div class="col-span-12 md:col-span-5 lg:col-span-3">
       <div class="flex flex-col gap-5 px-2.5">
-        <app-card-profile></app-card-profile>
-        <div class="bg-white shadow rounded p-4">
+        <app-card-profile *ngIf="user"></app-card-profile>
+        <div class="bg-white shadow rounded p-4" *ngIf="!user">
           <div class="flex flex-col gap-2">
             <div class="flex flex-col place-items-center py-4 gap-3">
               <i class="fa-solid fa-icons text-6xl text-primary"></i>
               <div class="flex flex-col place-items-center">
                 <span class="text-lg font-bold">Primasaga</span>
-                <span class="text-xs text-zinc-500 text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, tempora.</span>
+                <span class="text-xs text-zinc-500 text-center">Lorem ipsum dolor, sit amet consectetur adipisicing
+                  elit. Debitis, tempora.</span>
               </div>
             </div>
             <button routerLink="/signin" class="bg-primary bg-red-600 text-white font-bold">Masuk</button>
@@ -32,12 +33,13 @@
     </div>
     <div class="col-span-12 md:col-span-7 lg:col-span-6 order-first md:order-none">
       <div class="flex flex-col gap-5 px-2.5">
-        <div class="bg-white rounded p-4">
+        <div class="bg-white rounded p-4" *ngIf="user">
           <div class="flex flex-row justify-between">
             <div class="bg-zinc-200 h-10 w-10 rounded-full">
-              <img [src]="user?.image" alt="" class="object-cover rounded-full">
+              <img [src]="user.image" alt="" class="object-cover rounded-full">
             </div>
-            <button class="bg-primary hover:bg-red-600 text-white font-bold" (click)="openModalCreate()">Postingan Baru</button>
+            <button class="bg-primary hover:bg-red-600 text-white font-bold" (click)="openModalCreate()">Postingan
+              Baru</button>
           </div>
         </div>
         <app-list-post></app-list-post>
