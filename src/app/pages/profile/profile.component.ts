@@ -18,7 +18,7 @@ import { IPost, IUser } from 'src/app/shared/models/response';
 })
 export class ProfileComponent implements OnInit{
   service = inject(AuthService)
-
+  
   list: IPost[] = []
   users: IUser[] = []
   user?: IUser
@@ -26,23 +26,17 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit(): void {
     this.getUser()
-    this.getList()
-  }
-
-  getList(): void {
-    this.status = "loading"
-    setTimeout(() => {
-      this.list = postsProfileDummy(5)
-      this.status = "initial"
-    }, 500)
   }
 
   getUser(): void {
+    this.status = "loading"
     this.service.session().subscribe({
       next: (res) => {
+      this.status = "initial"
         this.user = res
       },
       error: (err) => {
+      this.status = "initial"
         console.log(err);
       }
     })

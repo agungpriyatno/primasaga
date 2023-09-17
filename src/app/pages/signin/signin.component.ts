@@ -54,7 +54,7 @@ export class SigninComponent {
 
     let formData = new FormData()
     formData.set("email", this.email?.value ?? "")
-    formData.append("password", this.email?.value ?? "")
+    formData.append("password", this.password?.value ?? "")
 
     this.service.signIn(formData).subscribe({
       next: (res) => {

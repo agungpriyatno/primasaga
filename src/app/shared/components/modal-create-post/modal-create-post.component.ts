@@ -49,7 +49,7 @@ export class ModalCreatePostComponent {
     let formData = new FormData()
     formData.set("content", this.content?.value ?? "")
     this.files.forEach(file => {
-      formData.set("media", file)
+      formData.append("media", file)
     })
     this.post.create(formData).subscribe({
       next: (res) => {
