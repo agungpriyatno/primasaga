@@ -1,13 +1,13 @@
 export interface IUser {
-  id: string,
+  id: number,
   name: string,
   username: string,
-  email: string,
+  email?: string,
   image: string,
 }
 
 export interface ICompany {
-  id: string,
+  id: number,
   name: string,
   username: string,
   email: string,
@@ -15,25 +15,26 @@ export interface ICompany {
 }
 
 export interface IPost {
-  id: string,
+  id: number,
   content: string,
   images: IPostImage[],
   user: IUser,
   like: number,
-  liked: boolean,
+  liked?: boolean,
   comment: number,
   createdAt: string,
   updatedAt: string,
 }
 
 export interface IPostImage {
-  id: string,
+  id: number,
   name: string,
   url: string,
+  type?: string,
 }
 
 export interface IPostComment {
-  id: string,
+  id: number,
   content: string,
   user: IUser,
   reply: number

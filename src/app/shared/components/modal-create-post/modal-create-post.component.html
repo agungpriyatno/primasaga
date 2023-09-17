@@ -1,4 +1,4 @@
-<div @modal class="absolute left-0 top-0 bg-black/25 h-screen w-screen z-50 text-zinc-800" (click)="close()"
+<div @modal class="absolute left-0 top-0 bg-black/25 h-screen w-screen z-50 text-zinc-800 overflow-y-auto py-5" (click)="close()"
   *ngIf="service.status">
   <div class="flex flex-col h-screen w-screen place-items-center justify-center">
     <div class="card bg-white rounded-lg p-5 relative w-[350px] md:w-[450px] mx-5" (click)="$event.stopPropagation()">
@@ -6,7 +6,7 @@
         <div class="flex flex-col place-items-center justify-center">
           <span class="font-bold text-lg">POSTINGAN BARU</span>
         </div>
-        <form class="flex flex-col gap-5">
+        <form [formGroup]="form" class="flex flex-col gap-5" (submit)="submit()">
           <div class="flex flex-row gap-3 place-items-center">
             <div class="h-12 w-12 2xl:h-16 2xl:w-16 bg-zinc-200 rounded-full"></div>
             <div class="flex flex-col gap-1">
@@ -18,18 +18,39 @@
               </div>
             </div>
           </div>
-          <textarea name="" id="" cols="30" rows="5" placeholder="Apa yang kamu pikirkan ?"
-          class="focus:outline-none text-base placeholder:text-xl" [ngClass]=""></textarea>
-          <input type="file" hidden id="file">
-            <label for="file" class="w-full h-[200px] rounded bg-zinc-100 hover:bg-zinc-200 relative transition-colors duration-200">
+          {{fileUrls}}
+          <textarea formControlName="content" name="" id="" cols="30" rows="5" placeholder="Apa yang kamu pikirkan ?"
+            class="focus:outline-none text-base placeholder:text-xl" [ngClass]=""></textarea>
+          <input multiple="true" type="file" hidden id="file" (change)="onFilePick($event)" accept="image/*">
+          <label *ngIf="fileUrls.length == 0" for="file"
+            class="w-full h-[200px] rounded bg-zinc-100 hover:bg-zinc-200 relative transition-colors duration-200">
+            <div class="flex flex-col h-full justify-center place-items-center">
+              <i class="fa-solid fa-camera text-xl"></i>
+              <span class="font-bold">Tambahkan Gambar</span>
+            </div>
+            <button type="button" class="absolute right-2 top-2 text-xl">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </label>
+          <div class="w-full grid grid-cols-2 gap-1" *ngIf="fileUrls.length != 0">
+            <ng-container *ngFor="let item of fileUrls; let i = index">
+              <div class="w-full h-[200px] bg-zinc-200 rounded overflow-hidden group relative">
+                <img [src]="item" alt="" class="w-full h-[200px] object-center object-fill">
+                <div class="absolute left-0 top-0 h-full w-full bg-zinc-500/50 opacity-0 group-hover:opacity-100 animate z-10" (click)="deleteImage(i)">
+                  <div class="flex flex-col h-full justify-center place-items-center">
+                    <i class="fa-solid fa-trash text-red-500 text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <label for="file"
+              class="w-full h-[200px] rounded bg-zinc-100 hover:bg-zinc-200 relative transition-colors duration-200">
               <div class="flex flex-col h-full justify-center place-items-center">
                 <i class="fa-solid fa-camera text-xl"></i>
-                <span class="font-bold">Tambahkan Gambar</span>
+                <span class="font-bold">Tambahkan</span>
               </div>
-              <button type="button" class="absolute right-2 top-2 text-xl">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </button>
-          </label>
+            </label>
+          </div>
           <div class="px-3 py-2 rounded border">
             <div class="flex flex-row w-full justify-between place-items-center">
               <span class="text-zinc-500 ">Tambahkan</span>
@@ -46,8 +67,7 @@
           <button type="button" class="absolute right-2 top-2 text-xl" (click)="close()">
             <i class="fa-solid fa-circle-xmark"></i>
           </button>
-          <button
-            class="px-3 py-2 rounded bg-primary ransition-colors duration-200 hover:bg-red-600 text-white w-full">
+          <button class="px-3 py-2 rounded bg-primary ransition-colors duration-200 hover:bg-red-600 text-white w-full">
             <span class="font-bold">UNGGAH</span>
           </button>
         </form>

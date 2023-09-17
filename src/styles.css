@@ -29,6 +29,6 @@ input {
   @apply focus:outline-none px-3 py-2 bg-transparent
 }
 
-button {
+button, a {
   @apply px-3 py-2 rounded transition-all duration-200
 }

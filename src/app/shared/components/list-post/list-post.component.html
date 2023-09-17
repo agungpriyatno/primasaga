@@ -3,7 +3,7 @@
     <app-post-card [post]="item"></app-post-card>
   </ng-container>
   <div class="flex flex-row w-full justify-center place-items-center" *ngIf="status == 'initial'">
-    <button class="bg-primary text-white hover:bg-red-600" (click)="getList()">Lebih Banyak</button>
+    <button class="bg-primary text-white hover:bg-red-600" (click)="loadMore()">Lebih Banyak</button>
   </div>
   <ng-container *ngIf="status == 'loading'">
     <div *ngFor="let item of [0,0]">

@@ -9,8 +9,8 @@
     </button>
   </div>
   <div class="flex flex-row gap-2 pl-12">
-    <span class="text-xs text-primary cursor-pointer" (click)="onReply()">{{reply ? 'Tutup Balasan' : 'Balas'}}</span>
-    <span class="text-xs text-primary cursor-pointer" (click)="onReply()" *ngIf="((data?.reply ?? 0) > 0) && !reply">Lihat {{data?.reply}} Balasan</span>
+    <!-- <span class="text-xs text-primary cursor-pointer" (click)="onReply()">{{reply ? 'Tutup Balasan' : 'Balas'}}</span>
+    <span class="text-xs text-primary cursor-pointer" (click)="onReply()" *ngIf="((data?.reply ?? 0) > 0) && !reply">Lihat {{data?.reply}} Balasan</span> -->
   </div>
   <app-post-reply @fadeDropdown [data]="data" *ngIf="reply" (onReply)="onAddReply()"></app-post-reply>
 </div>

@@ -6,6 +6,8 @@ import { IPost, IPostComment } from 'src/app/shared/models/response';
 import { PostCommentItemComponent } from '../post-comment-item/post-comment-item.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { CommentService } from 'src/app/core/service/comment.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-comment',
@@ -25,11 +27,14 @@ export class PostCommentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private toast: ToastService,
+    private service: CommentService
   ){}
 
   user = USER
   list: IPostComment[] = []
   status: "loading" | "initial" | "error" = "initial"
+  take = 5
+  skip = 0
 
   form = this.fb.group({
     content: [""]
@@ -45,22 +50,34 @@ export class PostCommentComponent implements OnInit {
 
   submit(){
     console.log();
-    var comment = {
-      id: "1",
-      user: USER,
-      content: (this.content?.value ?? ""),
-      reply: 0
-    }
-    this.list.push(comment)
-    this.addComment.emit()
-    this.form.reset()
+    let formData: FormData = new FormData()
+    formData.set("content", this.content?.value ?? "")
+
+    this.service.create(this.data?.id ?? 0, formData).subscribe({
+      next: (res) => {
+        console.log(res);
+        
+        this.list.push(res)
+        this.addComment.emit()
+        this.form.reset()
+      }
+    })
+    
   }
 
   getList() {
     this.status = "loading"
-    setTimeout(() => {
-      this.list.push(...commentsDummy((this.data?.comment ?? 0) , +(this.data?.id ?? 0)))
-      this.status = "initial"
-    }, 500)
+    let params = new HttpParams()
+    .set("take", this.take)
+    .append("skip", this.skip)
+    this.service.query(this.data?.id ?? 0, params).subscribe({
+      next: (res) => {
+        this.list.push(...res)
+        this.status = "initial"
+      }, 
+      error: (err) => {
+        this.status = "initial"
+      }
+    })
   }
 }

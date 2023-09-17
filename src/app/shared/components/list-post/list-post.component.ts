@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { postsDummy, postsProfileDummy } from '../../dummy/post';
 import { IPost, IUser } from '../../models/response';
 import { PostCardComponent } from './post-card/post-card.component';
+import { PostService } from 'src/app/core/service/post.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-post',
@@ -17,8 +19,14 @@ import { PostCardComponent } from './post-card/post-card.component';
 export class ListPostComponent {
   @Input() user?: IUser
 
+  private service = inject(PostService)
+
   list: IPost[] = []
   status: "initial" | "loading" = "initial"
+
+  take: number = 10
+  skip: number = 0
+
   ngOnInit(): void {
     this.getList()
   }
@@ -27,12 +35,40 @@ export class ListPostComponent {
     this.status = "loading"
     setTimeout(() => {
       if (this.user != undefined) {
-        this.list.push(...postsProfileDummy(5))
+        this.params.append("userId", this.user.id)
+        this.service.query(this.params).subscribe({
+          next: (res) => {
+            
+            this.list.push(...res)
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       } else {
-        this.list.push(...postsDummy(5))
+        this.service.query(this.params).subscribe({
+          next: (res) => {
+            this.list.push(...res)
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       }
       this.status = "initial"
     }, 500)
+  }
+
+  loadMore() {
+    this.skip += this.take
+    this.getList()
+  }
+
+  get params(): HttpParams {
+    let p: HttpParams = new HttpParams()
+    .set("take", this.take)
+    .append("skip", this.skip)
+    return p
   }
 
 }

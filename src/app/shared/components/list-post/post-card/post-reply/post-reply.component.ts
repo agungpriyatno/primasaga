@@ -44,7 +44,7 @@ export class PostReplyComponent {
   submit(){
     console.log();
     var comment = {
-      id: "1",
+      id: 1,
       user: USER,
       content: (this.content?.value ?? ""),
       reply: 0
