@@ -5,6 +5,7 @@ import { IPost, IUser } from '../../models/response';
 import { PostCardComponent } from './post-card/post-card.component';
 import { PostService } from 'src/app/core/service/post.service';
 import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-post',
@@ -20,25 +21,35 @@ export class ListPostComponent {
   @Input() user?: IUser
 
   private service = inject(PostService)
+  private activate = inject(ActivatedRoute)
 
   list: IPost[] = []
-  status: "initial" | "loading" = "initial"
-
+  status: "initial" | "loading" = "loading"
+  userId?: string
   take: number = 10
   skip: number = 0
 
   ngOnInit(): void {
-    this.getList()
+    this.activate.params.subscribe((res) => {
+      console.log(res);
+      this.userId = res["id"]
+      this.getList()
+
+    })
   }
 
   getList(): void {
     this.status = "loading"
     setTimeout(() => {
-      if (this.user != undefined) {
-        this.params.append("userId", this.user.id)
-        this.service.query(this.params).subscribe({
+      
+      if (this.userId != undefined) {
+        let params: HttpParams = new HttpParams()
+      .set("take", this.take)
+      .append("skip", this.skip)
+        .append("userId", this.userId)
+        this.service.query(params).subscribe({
           next: (res) => {
-            
+
             this.list.push(...res)
           },
           error: (err) => {
@@ -66,8 +77,8 @@ export class ListPostComponent {
 
   get params(): HttpParams {
     let p: HttpParams = new HttpParams()
-    .set("take", this.take)
-    .append("skip", this.skip)
+      .set("take", this.take)
+      .append("skip", this.skip)
     return p
   }
 

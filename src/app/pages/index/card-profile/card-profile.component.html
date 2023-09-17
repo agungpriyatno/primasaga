@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="flex py-3 flex-col animate cursor-pointer hover:bg-red-100 text-primary text-center">
-      <a class="select-none" routerLink="/profile">Lihat Profil</a>
+      <a class="select-none" [routerLink]="'/profile/' + data?.id">Lihat Profil</a>
     </div>
     <div class="flex py-3 flex-col animate cursor-pointer hover:bg-red-100 text-primary text-center" (click)="logout()">
       <a class="select-none" >LOGOUT</a>
